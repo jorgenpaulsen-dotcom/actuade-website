@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive 3D view of the Actuade SPT-115 subsea pan and tilt unit.">
+  <title>SPT-115 3D Model | Actuade AS</title>
+  <link rel="stylesheet" href="css/actuade.css">
+  <script src="js/actuade.js" defer></script>
+  <script src="js/spt-viewer.bundle.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand-link" href="index.html" aria-label="Actuade AS home">
+          <img class="brand-logo" src="assets/logo/actuade.png" alt="Actuade AS">
+        </a>
+        <nav aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html" aria-current="page">Products</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="contact.html">About &amp; Contact</a></li>
+          </ul>
+        </nav>
+        <a class="nav-cta" href="contact.html#quote">Request quote</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle><span></span></button>
+      </div>
+    </header>
+
+    <nav class="mobile-panel" aria-label="Mobile navigation" data-mobile-panel>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="technology.html">Technology</a>
+      <a href="contact.html">About &amp; Contact</a>
+      <a href="contact.html#quote">Request quote</a>
+    </nav>
+
+    <main id="main">
+      <section class="model-section model-page section-dark" id="spt-115-3d" aria-labelledby="spt-model-title">
+        <div class="model-grid section-inner">
+          <div class="model-copy reveal">
+            <p class="eyebrow">SPT-115 public model</p>
+            <h1 id="spt-model-title">Explore the unit in 3D.</h1>
+            <p>Inspect the public SPT-115 geometry from the mounting interface to the pan and tilt housing, with the same rugged proportions used in field installations.</p>
+            <div class="model-specs" aria-label="SPT-115 model highlights">
+              <span>Compact yoke</span>
+              <span>Internal cable routing</span>
+              <span>Subsea housing geometry</span>
+            </div>
+            <div class="actions-row">
+              <a class="button button-secondary" href="products.html#spt115">Back to 115 Series</a>
+            </div>
+          </div>
+          <div class="spt-viewer reveal" data-spt-viewer>
+            <canvas aria-label="Interactive 3D model of the SPT-115 pan and tilt unit"></canvas>
+            <div class="viewer-loading" data-viewer-status>Loading model</div>
+            <div class="viewer-controls" aria-label="3D model controls">
+              <button type="button" data-viewer-action="toggle-spin" aria-label="Toggle rotation" aria-pressed="true" title="Toggle rotation">Spin</button>
+              <button type="button" data-viewer-action="reset" aria-label="Reset view" title="Reset view">Reset</button>
+              <button type="button" data-viewer-action="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+              <button type="button" data-viewer-action="zoom-out" aria-label="Zoom out" title="Zoom out">-</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

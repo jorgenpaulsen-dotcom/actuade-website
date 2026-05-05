@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About &amp; Contact — Actuade AS</title>
+<link rel="stylesheet" href="apple-site.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+
+/* ── PAGE HERO ── */
+.page-hero {
+  background: #000; padding: 100px 0 80px; text-align: center;
+}
+.page-hero .a-h1 { color: #fff; margin-bottom: 16px; }
+
+/* ── ABOUT SECTION ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.about-image {
+  border-radius: 18px; overflow: hidden; border: 1px solid #e0e0e0;
+}
+.about-image img {
+  width: 100%; height: 480px; object-fit: cover;
+  filter: brightness(0.7) saturate(0.7); display: block;
+}
+.about-body p {
+  font-size: 17px; font-weight: 300; color: #1d1d1f;
+  line-height: 1.7; letter-spacing: -0.374px; margin-bottom: 20px;
+}
+.about-facts {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-top: 36px;
+}
+.fact-card {
+  background: #f5f5f7; border: 1px solid #e0e0e0; border-radius: 11px;
+  padding: 18px 20px;
+}
+.fact-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #0066cc; margin-bottom: 4px;
+}
+.fact-val { font-size: 15px; font-weight: 400; color: #1d1d1f; }
+
+/* ── CONTACT LAYOUT ── */
+.contact-layout {
+  display: grid; grid-template-columns: 1fr 1.6fr;
+  gap: 80px; align-items: start;
+}
+.contact-intro {
+  font-size: 17px; font-weight: 300; color: #1d1d1f;
+  line-height: 1.7; letter-spacing: -0.374px; margin-bottom: 40px;
+}
+.contact-items { display: flex; flex-direction: column; gap: 16px; }
+.contact-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 18px 20px; background: #f5f5f7;
+  border: 1px solid #e0e0e0; border-radius: 11px;
+}
+.ci-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: rgba(0,102,204,0.08); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ci-icon svg { width: 18px; height: 18px; stroke: #0066cc; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.ci-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #6e6e73; margin-bottom: 3px;
+}
+.ci-val { font-size: 15px; font-weight: 300; color: #1d1d1f; }
+.ci-val a { color: #0066cc; text-decoration: none; }
+.ci-val a:hover { text-decoration: underline; }
+
+/* ── FORM CARD ── */
+.form-card {
+  background: #fff; border: 1px solid #e0e0e0; border-radius: 18px; padding: 44px 40px;
+}
+.form-card-title {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 600; color: #1d1d1f;
+  letter-spacing: 0.231px; margin-bottom: 32px; padding-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Success state */
+.form-success {
+  text-align: center; padding: 56px 24px;
+}
+.success-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(52,199,89,0.1); border: 1px solid rgba(52,199,89,0.3);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+}
+.success-icon svg { width: 26px; height: 26px; stroke: #34c759; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.form-success h3 {
+  font-family: var(--font-disp); font-size: 28px; font-weight: 600; color: #1d1d1f;
+  letter-spacing: -0.28px; margin-bottom: 12px;
+}
+.form-success p { font-size: 17px; font-weight: 300; color: #6e6e73; line-height: 1.6; }
+.form-success a { color: #0066cc; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .page-hero { padding: 64px 24px 56px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-image { display: none; }
+  .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+  .form-card { padding: 28px 24px; }
+  .about-facts { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="a-nav">
+  <a href="index.html"><img class="a-nav-logo" src="assets/actuade-logo.png" alt="Actuade AS"></a>
+  <ul class="a-nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="contact.html" class="active">About</a></li>
+  </ul>
+  <a href="#contact" class="a-nav-cta">Request Quote</a>
+  <button class="a-mob-btn" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+    <svg width="18" height="12" fill="none" stroke="rgba(245,245,247,0.85)" stroke-width="1.5" stroke-linecap="round">
+      <line x1="0" y1="1.5" x2="18" y2="1.5"/><line x1="0" y1="6" x2="18" y2="6"/><line x1="0" y1="10.5" x2="18" y2="10.5"/>
+    </svg>
+  </button>
+</nav>
+<div class="a-mob-menu" id="mob">
+  <a href="index.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">Home</a>
+  <a href="products.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">Products</a>
+  <a href="technology.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">Technology</a>
+  <a href="contact.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">About</a>
+  <a href="#contact" class="cta-link" onclick="this.closest('.a-mob-menu').classList.remove('open')">Request Quote ›</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="a-wrap">
+    <p class="a-eyebrow" style="text-align:center;">Actuade AS</p>
+    <h1 class="a-h1">About &amp; Contact.</h1>
+    <p class="a-tagline" style="color:rgba(255,255,255,0.65);max-width:520px;margin:16px auto 0;text-align:center;">Norwegian subsea technology manufacturer. Headquartered in Stjørdal, serving the global offshore and subsea industry.</p>
+  </div>
+</div>
+
+<div class="a-divider"></div>
+
+<!-- ABOUT -->
+<div class="a-tile a-tile-white">
+  <div class="a-wrap">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="assets/rov-photo.jpg" alt="Actuade SPT installed on work-class ROV">
+      </div>
+      <div class="about-body">
+        <p class="a-eyebrow">Our Story</p>
+        <h2 class="a-h2" style="margin-bottom:24px;">Norwegian precision for global subsea operations.</h2>
+        <p>Actuade AS is a Norwegian manufacturer of high-quality subsea components, based in Stjørdal. Our products are developed in close co-operation with end users and validated through extensive field testing.</p>
+        <p>The SPT series was built from the ground up to address real operational failures experienced by ROV crews — particularly the high rate of connector and gear failures caused by thruster proximity and mechanical impact.</p>
+        <p>Our approach: design for the worst case, manufacture to the highest standard, and keep the unit easy to service in the field.</p>
+        <div class="about-facts">
+          <div class="fact-card">
+            <div class="fact-label">Location</div>
+            <div class="fact-val">Stjørdal, Norway</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Primary Market</div>
+            <div class="fact-val">Work-class ROV</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Max Rated Depth</div>
+            <div class="fact-val">6000 m</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">Product Range</div>
+            <div class="fact-val">SPT-115 · SPT-150 · SPT-350</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="a-divider"></div>
+
+<!-- CONTACT -->
+<div class="a-tile a-tile-parchment" id="contact">
+  <div class="a-wrap">
+    <p class="a-eyebrow">Get in Touch</p>
+    <h2 class="a-h2" style="margin-bottom:56px;">Request a Quote.</h2>
+
+    <div class="contact-layout">
+      <div>
+        <p class="contact-intro">We respond promptly to technical enquiries and quote requests. All communications are treated confidentially.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Email</div>
+              <div class="ci-val"><a href="mailto:post@actuade.no">post@actuade.no</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.05 12.35 7.35 12.65a1 1 0 0 0 1.3 0C12.95 22.35 20 15.4 20 10a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Address</div>
+              <div class="ci-val">Wessels Veg 95, 7502 Stjørdal, Norway</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Website</div>
+              <div class="ci-val"><a href="https://www.actuade.no">www.actuade.no</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="form-root"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="a-footer">
+  <div class="a-footer-inner">
+    <div class="a-footer-grid">
+      <div class="a-footer-brand">
+        <img src="assets/actuade-logo.png" alt="Actuade AS">
+        <p>Norwegian manufacturer of high-quality subsea pan &amp; tilt units for work-class ROVs and instrument platforms.</p>
+      </div>
+      <div class="a-footer-col">
+        <div class="a-footer-col-title">Navigation</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="contact.html">About &amp; Contact</a></li>
+        </ul>
+      </div>
+      <div class="a-footer-col">
+        <div class="a-footer-col-title">Contact</div>
+        <ul>
+          <li><a href="mailto:post@actuade.no">post@actuade.no</a></li>
+          <li><span>www.actuade.no</span></li>
+          <li><span>Wessels Veg 95</span></li>
+          <li><span>7502 Stjørdal, Norway</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="a-footer-bottom">
+      <span class="a-footer-copy">© 2025 Actuade AS. All rights reserved.</span>
+      <span class="a-footer-copy">Stjørdal, Norway</span>
+    </div>
+  </div>
+</footer>
+
+<script type="text/babel">
+const { useState } = React;
+
+function ContactForm() {
+  const [f, setF] = useState({ name:'', company:'', email:'', phone:'', product:'', message:'' });
+  const [errors, setErrors] = useState({});
+  const [sent, setSent] = useState(false);
+
+  const set = (k, v) => {
+    setF(p => ({...p, [k]: v}));
+    setErrors(p => ({...p, [k]: false}));
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    const errs = {};
+    if (!f.name.trim()) errs.name = true;
+    if (!f.email.trim() || !f.email.includes('@')) errs.email = true;
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setSent(true);
+  };
+
+  if (sent) return (
+    <div className="form-card">
+      <div className="form-success">
+        <div className="success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Enquiry Received</h3>
+        <p>Thank you — we will respond within one business day.<br/>For urgent matters email <a href="mailto:post@actuade.no">post@actuade.no</a> directly.</p>
+      </div>
+    </div>
+  );
+
+  const inp = (field) => `a-form-input${errors[field] ? ' a-form-error' : ''}`;
+
+  return (
+    <form className="form-card" onSubmit={submit} noValidate>
+      <div className="form-card-title">Request for Quote / Technical Enquiry</div>
+
+      <div className="a-form-row">
+        <div className="a-form-field">
+          <label className="a-form-label">Full Name *</label>
+          <input className={inp('name')} type="text" placeholder="Your name" value={f.name} onChange={e => set('name', e.target.value)} />
+        </div>
+        <div className="a-form-field">
+          <label className="a-form-label">Company</label>
+          <input className="a-form-input" type="text" placeholder="Organisation" value={f.company} onChange={e => set('company', e.target.value)} />
+        </div>
+      </div>
+
+      <div className="a-form-row">
+        <div className="a-form-field">
+          <label className="a-form-label">Email Address *</label>
+          <input className={inp('email')} type="email" placeholder="name@company.com" value={f.email} onChange={e => set('email', e.target.value)} />
+        </div>
+        <div className="a-form-field">
+          <label className="a-form-label">Phone</label>
+          <input className="a-form-input" type="tel" placeholder="+47 xxx xx xxx" value={f.phone} onChange={e => set('phone', e.target.value)} />
+        </div>
+      </div>
+
+      <div className="a-form-field">
+        <label className="a-form-label">Product Interest</label>
+        <select className="a-form-select" value={f.product} onChange={e => set('product', e.target.value)}>
+          <option value="">Select product (optional)</option>
+          <option value="spt115">SPT-115 / SPA-115 — Aluminium</option>
+          <option value="spt150">SPT-150 / SPA-150 — Aluminium</option>
+          <option value="spt350">SPT-350 / SPA-350 — Titanium</option>
+          <option value="unsure">Unsure — Need Guidance</option>
+        </select>
+      </div>
+
+      <div className="a-form-field">
+        <label className="a-form-label">Message</label>
+        <textarea
+          className="a-form-textarea"
+          placeholder="Describe your application, depth requirements, quantity, delivery timeline, or any technical questions..."
+          value={f.message}
+          onChange={e => set('message', e.target.value)}
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="a-btn-primary"
+        style={{width:'100%', justifyContent:'center', padding:'14px 24px', fontSize:'17px'}}
+        onMouseDown={e => e.currentTarget.style.transform='scale(0.98)'}
+        onMouseUp={e => e.currentTarget.style.transform='scale(1)'}
+      >
+        Submit Enquiry
+      </button>
+    </form>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('form-root')).render(<ContactForm />);
+</script>
+
+</body>
+</html>

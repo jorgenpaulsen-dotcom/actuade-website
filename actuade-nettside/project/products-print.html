@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Actuade AS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal:  #40C8E8;
+  --blue:  #0A10B8;
+  --mid:   #2468CC;
+  --gradient: linear-gradient(90deg, #40C8E8 0%, #2468CC 50%, #0A10B8 100%);
+  --d900: #070A14;
+  --d800: #0A0D1A;
+  --d700: #0F1428;
+  --d600: #161C38;
+  --d500: #1E2748;
+  --d400: #2A3460;
+  --d300: #3D4E7E;
+  --d100: #8A9AC0;
+  --d050: #C8D0E8;
+  --font-display: 'Barlow Condensed', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Barlow', 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--d800);
+  color: var(--d050);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── PAGE LAYOUT ── */
+.product-page {
+  width: 100%;
+  padding: 48px 56px;
+  background: var(--d800);
+  break-after: page;
+  break-inside: avoid;
+}
+.product-page:last-of-type { break-after: auto; }
+
+.compare-page {
+  width: 100%;
+  padding: 48px 56px;
+  background: var(--d900);
+  break-inside: avoid;
+}
+
+/* ── HEADER ── */
+.page-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--d400);
+}
+.page-header-logo img { height: 24px; }
+.page-header-meta {
+  font-family: var(--font-body);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--d100);
+}
+
+/* ── PRODUCT LAYOUT ── */
+.product-layout {
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 56px; align-items: start;
+}
+
+.product-visual {
+  background: var(--d700);
+  border: 1px solid var(--d400);
+  border-radius: 6px;
+  padding: 36px 28px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.product-visual img {
+  width: 200px; height: 200px; object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(64,200,232,0.15));
+  margin-bottom: 24px;
+}
+.visual-badges {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+}
+.badge {
+  font-family: var(--font-body);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--teal);
+  padding: 4px 10px;
+  border: 1px solid rgba(64,200,232,0.3);
+  border-radius: 3px; white-space: nowrap;
+}
+
+/* ── PRODUCT INFO ── */
+.eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--teal);
+  font-family: var(--font-body); margin-bottom: 6px;
+}
+.product-number {
+  font-family: var(--font-display);
+  font-size: 60px; font-weight: 800;
+  text-transform: uppercase; line-height: 1; color: #fff;
+  margin-bottom: 4px;
+}
+.product-subtitle {
+  font-family: var(--font-body);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+}
+.product-desc {
+  font-size: 13px; font-weight: 300; color: var(--d100);
+  line-height: 1.7; margin-bottom: 24px;
+  border-left: 2px solid var(--teal); padding-left: 16px;
+}
+
+/* ── CONFIGS ── */
+.configs {
+  margin-bottom: 24px;
+  background: var(--d600);
+  border: 1px solid var(--d400);
+  border-radius: 4px; padding: 16px 20px;
+}
+.configs-title {
+  font-family: var(--font-body);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--d100); margin-bottom: 12px;
+}
+.config-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.config-item { display: flex; align-items: flex-start; gap: 8px; }
+.config-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0; margin-top: 5px;
+}
+.config-text { font-size: 11px; font-weight: 300; color: var(--d050); line-height: 1.5; }
+
+/* ── SPECS ── */
+.specs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+.spec-group { margin-bottom: 20px; break-inside: avoid; }
+.spec-group-title {
+  font-family: var(--font-body);
+  font-size: 9px; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--mid);
+  margin-bottom: 8px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--d400);
+}
+.spec-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+  padding: 6px 0; border-bottom: 1px solid rgba(42,52,96,0.4);
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-k { font-size: 11px; font-weight: 400; color: var(--d100); }
+.spec-v { font-size: 11px; font-weight: 500; color: var(--d050); text-align: right; }
+
+/* ── COMPARE TABLE ── */
+.compare-header { margin-bottom: 32px; }
+.compare-header h2 {
+  font-family: var(--font-display); font-size: 48px; font-weight: 800;
+  text-transform: uppercase; color: #fff; line-height: 1;
+}
+.compare-table {
+  width: 100%; border-collapse: collapse;
+}
+.compare-table th {
+  font-family: var(--font-display); font-size: 18px; font-weight: 800;
+  text-transform: uppercase; color: #fff;
+  padding: 12px 16px; text-align: left;
+  border-bottom: 2px solid var(--d400);
+  background: var(--d700);
+}
+.compare-table th:first-child {
+  color: var(--d100); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; font-family: var(--font-body);
+}
+.compare-table td {
+  padding: 10px 16px; font-size: 13px; font-weight: 300;
+  color: var(--d050); border-bottom: 1px solid rgba(42,52,96,0.4);
+}
+.compare-table td:first-child { color: var(--d100); font-weight: 400; font-size: 12px; }
+.compare-table tr:nth-child(even) td { background: rgba(15,20,40,0.4); }
+
+/* ── FOOTER LINE ── */
+.print-footer {
+  margin-top: 32px; padding-top: 16px;
+  border-top: 1px solid var(--d400);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.print-footer span {
+  font-size: 10px; font-weight: 300; color: var(--d100);
+  letter-spacing: 0.08em;
+}
+
+/* ── PRINT STYLES ── */
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  body { background: var(--d800) !important; }
+  .product-page, .compare-page { page-break-after: always; }
+  .product-page:last-of-type { page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: 115 Series -->
+<div class="product-page">
+  <div class="page-header">
+    <div class="page-header-logo"><img src="assets/actuade-logo.png" alt="Actuade AS"></div>
+    <div class="page-header-meta">Product Datasheet · actuade.no · post@actuade.no</div>
+  </div>
+
+  <div class="product-layout">
+    <div class="product-visual">
+      <img src="assets/spt-115-final.png" alt="115 Series">
+      <div class="visual-badges">
+        <span class="badge">6000 m Rated</span>
+        <span class="badge">Oil-Filled</span>
+        <span class="badge">12-bit Absolute</span>
+        <span class="badge">No Rotating Connector</span>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <div class="eyebrow">Product Datasheet</div>
+      <div class="product-number">115 Series</div>
+      <div class="product-subtitle">SPT-115 · SPA-115 · SPT-315 · SPA-315</div>
+      <p class="product-desc">
+        Designed for continuous, hard use in the most demanding subsea environments. Developed in close cooperation with ROV operators — withstands thruster wash and physical impacts through its high-mounted rotation axis and precision strain wave gears.
+      </p>
+
+      <div class="configs">
+        <div class="configs-title">Available Configurations</div>
+        <div class="config-grid">
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPT-115</strong> — Pan &amp; Tilt, aluminium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPA-115</strong> — Pan only, aluminium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPT-315</strong> — Pan &amp; Tilt, titanium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPA-315</strong> — Pan only, titanium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text">Ethernet, RS-485 or RS-232</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text">Customer-selectable connectors</div></div>
+        </div>
+      </div>
+
+      <div class="specs-cols">
+        <div>
+          <div class="spec-group">
+            <div class="spec-group-title">Electrical</div>
+            <div class="spec-row"><span class="spec-k">Input Voltage</span><span class="spec-v">24 VDC</span></div>
+            <div class="spec-row"><span class="spec-k">Drive Current</span><span class="spec-v">500 mA – 2.5 A per axis</span></div>
+            <div class="spec-row"><span class="spec-k">Communication</span><span class="spec-v">Ethernet, RS-485, RS-232</span></div>
+            <div class="spec-row"><span class="spec-k">Connector</span><span class="spec-v">Customer selectable</span></div>
+          </div>
+          <div class="spec-group">
+            <div class="spec-group-title">Mechanical</div>
+            <div class="spec-row"><span class="spec-k">Pan Range</span><span class="spec-v">± 175°</span></div>
+            <div class="spec-row"><span class="spec-k">Tilt Range</span><span class="spec-v">± 175° / ± 110° (dual yoke)</span></div>
+            <div class="spec-row"><span class="spec-k">Max Speed</span><span class="spec-v">30 °/sec</span></div>
+            <div class="spec-row"><span class="spec-k">Single Step</span><span class="spec-v">0.018°</span></div>
+            <div class="spec-row"><span class="spec-k">Position Feedback</span><span class="spec-v">12-bit absolute (~0.1°)</span></div>
+            <div class="spec-row"><span class="spec-k">Gears</span><span class="spec-v">Precision strain wave</span></div>
+            <div class="spec-row"><span class="spec-k">Backlash</span><span class="spec-v">&lt; 3 arc min (~0.05°)</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="spec-group">
+            <div class="spec-group-title">Environmental &amp; Physical</div>
+            <div class="spec-row"><span class="spec-k">Operating Depth</span><span class="spec-v">Down to 6000 m</span></div>
+            <div class="spec-row"><span class="spec-k">Operating Temp.</span><span class="spec-v">-20°C to +50°C</span></div>
+            <div class="spec-row"><span class="spec-k">Storage Temp.</span><span class="spec-v">-30°C to +60°C</span></div>
+            <div class="spec-row"><span class="spec-k">Average Torque</span><span class="spec-v">15 Nm</span></div>
+            <div class="spec-row"><span class="spec-k">Max Payload (dual yoke)</span><span class="spec-v">20 kg</span></div>
+            <div class="spec-row"><span class="spec-k">Max Payload (single yoke)</span><span class="spec-v">10 kg</span></div>
+            <div class="spec-row"><span class="spec-k">Dimensions (H/W/D)</span><span class="spec-v">238 × 130 × 88 mm</span></div>
+            <div class="spec-row"><span class="spec-k">Flange Diameter</span><span class="spec-v">Ø 120 mm</span></div>
+            <div class="spec-row"><span class="spec-k">Weight in Air</span><span class="spec-v">5.2 kg (Al)</span></div>
+            <div class="spec-row"><span class="spec-k">Weight in Water</span><span class="spec-v">3.4 kg (Al)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="print-footer">
+    <span>Actuade AS · Wessels Veg 95, 7502 Stjørdal, Norway</span>
+    <span>post@actuade.no · www.actuade.no</span>
+    <span>All specifications subject to change without notice</span>
+  </div>
+</div>
+
+<!-- PAGE 2: 150 Series -->
+<div class="product-page">
+  <div class="page-header">
+    <div class="page-header-logo"><img src="assets/actuade-logo.png" alt="Actuade AS"></div>
+    <div class="page-header-meta">Product Datasheet · actuade.no · post@actuade.no</div>
+  </div>
+
+  <div class="product-layout">
+    <div class="product-visual">
+      <img src="assets/spt-150-final.png" alt="150 Series">
+      <div class="visual-badges">
+        <span class="badge">6000 m Rated</span>
+        <span class="badge">50 Nm Torque</span>
+        <span class="badge">100 kg Payload</span>
+        <span class="badge">Titanium Available</span>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <div class="eyebrow">Product Datasheet</div>
+      <div class="product-number">150 Series</div>
+      <div class="product-subtitle">SPT-150 · SPA-150 · SPT-350 · SPA-350</div>
+      <p class="product-desc">
+        The heavy-duty model for high-payload applications. With 50 Nm of torque and a dual-yoke capacity of 100 kg, it handles large cameras, sonar heads and heavy intervention tooling. Titanium variants offer reduced weight and superior corrosion resistance.
+      </p>
+
+      <div class="configs">
+        <div class="configs-title">Available Configurations</div>
+        <div class="config-grid">
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPT-150</strong> — Pan &amp; Tilt, aluminium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPA-150</strong> — Pan only, aluminium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPT-350</strong> — Pan &amp; Tilt, titanium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text"><strong>SPA-350</strong> — Pan only, titanium</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text">Ethernet, RS-232 or RS-485</div></div>
+          <div class="config-item"><div class="config-dot"></div><div class="config-text">Seacon MCBH5 or customer connector</div></div>
+        </div>
+      </div>
+
+      <div class="specs-cols">
+        <div>
+          <div class="spec-group">
+            <div class="spec-group-title">Electrical</div>
+            <div class="spec-row"><span class="spec-k">Input Voltage</span><span class="spec-v">24 VDC</span></div>
+            <div class="spec-row"><span class="spec-k">Drive Current</span><span class="spec-v">4 A</span></div>
+            <div class="spec-row"><span class="spec-k">Communication</span><span class="spec-v">Ethernet, RS-232, RS-485</span></div>
+            <div class="spec-row"><span class="spec-k">Connector</span><span class="spec-v">Seacon MCBH5 / Customer</span></div>
+          </div>
+          <div class="spec-group">
+            <div class="spec-group-title">Mechanical</div>
+            <div class="spec-row"><span class="spec-k">Pan Range</span><span class="spec-v">± 175°</span></div>
+            <div class="spec-row"><span class="spec-k">Tilt Range</span><span class="spec-v">± 110° (yoke mounted)</span></div>
+            <div class="spec-row"><span class="spec-k">Max Speed</span><span class="spec-v">20 °/sec</span></div>
+            <div class="spec-row"><span class="spec-k">Single Step</span><span class="spec-v">0.018°</span></div>
+            <div class="spec-row"><span class="spec-k">Position Feedback</span><span class="spec-v">12-bit absolute (~0.1°)</span></div>
+            <div class="spec-row"><span class="spec-k">Gears</span><span class="spec-v">Precision strain wave</span></div>
+            <div class="spec-row"><span class="spec-k">Backlash</span><span class="spec-v">&lt; 3 arc min (~0.05°)</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="spec-group">
+            <div class="spec-group-title">Environmental &amp; Physical</div>
+            <div class="spec-row"><span class="spec-k">Operating Depth</span><span class="spec-v">Down to 6000 m</span></div>
+            <div class="spec-row"><span class="spec-k">Operating Temp.</span><span class="spec-v">-20°C to +50°C</span></div>
+            <div class="spec-row"><span class="spec-k">Storage Temp.</span><span class="spec-v">-30°C to +60°C</span></div>
+            <div class="spec-row"><span class="spec-k">Average Torque</span><span class="spec-v">50 Nm</span></div>
+            <div class="spec-row"><span class="spec-k">Max Payload (dual yoke)</span><span class="spec-v">100 kg</span></div>
+            <div class="spec-row"><span class="spec-k">Max Payload (single yoke)</span><span class="spec-v">50 kg</span></div>
+            <div class="spec-row"><span class="spec-k">Dimensions (H/W/D)</span><span class="spec-v">302.8 × 166.2 × 110 mm</span></div>
+            <div class="spec-row"><span class="spec-k">Flange Diameter</span><span class="spec-v">Ø 150 mm</span></div>
+            <div class="spec-row"><span class="spec-k">Weight in Air</span><span class="spec-v">10.4 kg (Al) / 13.0 kg (Ti)</span></div>
+            <div class="spec-row"><span class="spec-k">Weight in Water</span><span class="spec-v">6.9 kg (Al) / 9.5 kg (Ti)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="print-footer">
+    <span>Actuade AS · Wessels Veg 95, 7502 Stjørdal, Norway</span>
+    <span>post@actuade.no · www.actuade.no</span>
+    <span>All specifications subject to change without notice</span>
+  </div>
+</div>
+
+<!-- PAGE 3: Comparison -->
+<div class="compare-page">
+  <div class="page-header">
+    <div class="page-header-logo"><img src="assets/actuade-logo.png" alt="Actuade AS"></div>
+    <div class="page-header-meta">Product Comparison · actuade.no · post@actuade.no</div>
+  </div>
+
+  <div class="compare-header">
+    <div class="eyebrow">Comparison</div>
+    <h2>115 Series vs 150 Series</h2>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>115 Series<br><span style="font-size:11px;font-weight:400;opacity:0.65">SPT/SPA-115 · SPT/SPA-315</span></th>
+        <th>150 Series<br><span style="font-size:11px;font-weight:400;opacity:0.65">SPT/SPA-150 · SPT/SPA-350</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Operating Depth</td><td>6000 m</td><td>6000 m</td></tr>
+      <tr><td>Average Torque</td><td>15 Nm</td><td>50 Nm</td></tr>
+      <tr><td>Max Payload (dual yoke)</td><td>20 kg</td><td>100 kg</td></tr>
+      <tr><td>Pan Range</td><td>± 175°</td><td>± 175°</td></tr>
+      <tr><td>Tilt Range</td><td>± 175° / ± 110°</td><td>± 110°</td></tr>
+      <tr><td>Max Speed</td><td>30 °/sec</td><td>20 °/sec</td></tr>
+      <tr><td>Position Resolution</td><td>12-bit (~0.1°)</td><td>12-bit (~0.1°)</td></tr>
+      <tr><td>Backlash</td><td>&lt; 3 arc min</td><td>&lt; 3 arc min</td></tr>
+      <tr><td>Dimensions (H/W/D)</td><td>238 × 130 × 88 mm</td><td>302.8 × 166.2 × 110 mm</td></tr>
+      <tr><td>Weight in Air (Al)</td><td>5.2 kg</td><td>10.4 kg</td></tr>
+      <tr><td>Material options</td><td>Aluminium · Titanium</td><td>Aluminium · Titanium</td></tr>
+      <tr><td>Configurations</td><td>Pan &amp; Tilt · Pan only</td><td>Pan &amp; Tilt · Pan only</td></tr>
+      <tr><td>Communication</td><td>Ethernet, RS-485, RS-232</td><td>Ethernet, RS-485, RS-232</td></tr>
+    </tbody>
+  </table>
+
+  <div class="print-footer">
+    <span>Actuade AS · Wessels Veg 95, 7502 Stjørdal, Norway</span>
+    <span>post@actuade.no · www.actuade.no</span>
+    <span>All specifications subject to change without notice</span>
+  </div>
+</div>
+
+<script>
+document.fonts.ready.then(function() {
+  setTimeout(function() { window.print(); }, 500);
+});
+</script>
+</body>
+</html>

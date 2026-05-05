@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actuade AS — Subsea Pan &amp; Tilt Units</title>
+<link rel="stylesheet" href="apple-site.css">
+<style>
+/* ── HERO ── */
+.hero {
+  background: #000;
+  min-height: 100svh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 64px 80px 56px;
+  position: relative; z-index: 2;
+}
+.hero-eyebrow {
+  font-size: 17px; font-weight: 600; color: #2997ff;
+  letter-spacing: 0.231px; margin-bottom: 16px;
+  font-family: var(--font-disp);
+}
+.hero-h1 {
+  font-family: var(--font-disp);
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 600; color: #fff;
+  line-height: 1.06; letter-spacing: -0.28px;
+  margin-bottom: 20px;
+}
+.hero-tagline {
+  font-family: var(--font-disp);
+  font-size: 21px; font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5; letter-spacing: 0.2px;
+  max-width: 480px; margin-bottom: 40px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 64px; }
+.hero-stats {
+  display: flex; gap: 48px;
+  padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.stat-val {
+  font-family: var(--font-disp);
+  font-size: 34px; font-weight: 600; color: #fff;
+  line-height: 1; letter-spacing: -0.28px; margin-bottom: 4px;
+}
+.stat-lbl {
+  font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.45);
+  letter-spacing: -0.12px;
+}
+.hero-right {
+  position: relative; overflow: hidden;
+}
+.hero-right img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center;
+  filter: brightness(0.5) saturate(0.6);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 20%, #000 50%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 20%, #000 50%);
+}
+
+/* ── PRODUCTS TEASER ── */
+.prod-cards { display: flex; flex-direction: column; gap: 2px; margin-top: 56px; }
+.prod-card {
+  display: grid; grid-template-columns: 280px 1fr;
+  background: #fff; border: 1px solid #e0e0e0; border-radius: 18px;
+  overflow: hidden; text-decoration: none; color: inherit;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+.prod-card + .prod-card { margin-top: 16px; }
+.prod-card:hover {
+  box-shadow: rgba(0,0,0,0.12) 0 8px 30px;
+  transform: translateY(-2px);
+}
+.prod-card-img {
+  background: #f5f5f7;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 32px;
+  border-right: 1px solid #e0e0e0;
+}
+.prod-card-img img {
+  width: 180px; height: 180px; object-fit: contain;
+  filter: drop-shadow(rgba(0,0,0,0.22) 3px 5px 30px);
+}
+.prod-card-body { padding: 40px 44px; display: flex; flex-direction: column; }
+.prod-card-eyebrow {
+  font-size: 12px; font-weight: 600; color: #0066cc;
+  letter-spacing: -0.12px; margin-bottom: 8px;
+}
+.prod-card-name {
+  font-family: var(--font-disp);
+  font-size: 40px; font-weight: 600; color: #1d1d1f;
+  line-height: 1.10; letter-spacing: 0px; margin-bottom: 24px;
+}
+.prod-spec-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0 40px; margin-bottom: 28px; flex: 1;
+}
+.prod-spec-line {
+  display: flex; justify-content: space-between;
+  padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+}
+.prod-spec-line:last-child { border-bottom: none; }
+.psl-k { color: #6e6e73; font-weight: 400; }
+.psl-v { color: #1d1d1f; font-weight: 400; text-align: right; }
+.prod-card-link {
+  font-size: 17px; font-weight: 400; color: #0066cc;
+  letter-spacing: -0.374px; align-self: flex-start;
+  text-decoration: none;
+}
+.prod-card-link:hover { text-decoration: underline; }
+
+/* ── WHY GRID ── */
+.why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 56px;
+}
+.why-card {
+  background: #fff; border: 1px solid #e0e0e0; border-radius: 18px;
+  padding: 44px 36px;
+  transition: box-shadow 200ms ease;
+}
+.why-card + .why-card { margin-left: -1px; border-radius: 0; }
+.why-grid .why-card:first-child { border-radius: 18px 0 0 18px; }
+.why-grid .why-card:last-child  { border-radius: 0 18px 18px 0; }
+.why-num {
+  font-family: var(--font-disp);
+  font-size: 12px; font-weight: 600; color: #0066cc;
+  letter-spacing: -0.12px; margin-bottom: 20px;
+}
+.why-title {
+  font-family: var(--font-disp);
+  font-size: 21px; font-weight: 600; color: #1d1d1f;
+  line-height: 1.19; letter-spacing: 0.231px;
+  margin-bottom: 12px;
+}
+.why-text {
+  font-size: 14px; font-weight: 300; color: #6e6e73;
+  line-height: 1.7; letter-spacing: -0.224px;
+}
+
+/* ── CTA STRIP ── */
+.cta-strip-inner {
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.cta-strip-text h2 { margin-bottom: 8px; }
+.cta-strip-text p {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.65);
+  letter-spacing: -0.374px;
+}
+.cta-strip-btns { display: flex; gap: 12px; flex-shrink: 0; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 72px 24px 64px; }
+  .hero-stats { flex-wrap: wrap; gap: 28px; }
+  .stat-val { font-size: 26px; }
+  .prod-card { grid-template-columns: 1fr; }
+  .prod-card-img { border-right: none; border-bottom: 1px solid #e0e0e0; }
+  .prod-spec-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; gap: 12px; }
+  .why-card, .why-grid .why-card:first-child,
+  .why-grid .why-card:last-child { border-radius: 18px; margin-left: 0; }
+  .cta-strip-inner { flex-direction: column; text-align: center; }
+  .cta-strip-btns { justify-content: center; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="a-nav">
+  <a href="index.html"><img class="a-nav-logo" src="assets/actuade-logo.png" alt="Actuade AS"></a>
+  <ul class="a-nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="contact.html">About</a></li>
+  </ul>
+  <a href="contact.html" class="a-nav-cta">Request Quote</a>
+  <button class="a-mob-btn" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+    <svg width="18" height="12" fill="none" stroke="rgba(245,245,247,0.85)" stroke-width="1.5" stroke-linecap="round">
+      <line x1="0" y1="1.5" x2="18" y2="1.5"/><line x1="0" y1="6" x2="18" y2="6"/><line x1="0" y1="10.5" x2="18" y2="10.5"/>
+    </svg>
+  </button>
+</nav>
+<div class="a-mob-menu" id="mob">
+  <a href="index.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">Home</a>
+  <a href="products.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">Products</a>
+  <a href="technology.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">Technology</a>
+  <a href="contact.html" onclick="this.closest('.a-mob-menu').classList.remove('open')">About</a>
+  <a href="contact.html" class="cta-link" onclick="this.closest('.a-mob-menu').classList.remove('open')">Request Quote ›</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Norwegian Subsea Technology</p>
+    <h1 class="hero-h1">Precision Pan &amp; Tilt. Built for 6000 m.</h1>
+    <p class="hero-tagline">Rugged, oil-filled pan &amp; tilt units for work-class ROVs and subsea instrument platforms. No rotating connectors. No compromises.</p>
+    <div class="hero-ctas">
+      <a href="products.html" class="a-btn-primary">View Products</a>
+      <a href="contact.html" class="a-btn-outline a-btn-outline-dark">Request Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">6000 m</div>
+        <div class="stat-lbl">Operating Depth</div>
+      </div>
+      <div>
+        <div class="stat-val">100 kg</div>
+        <div class="stat-lbl">Max Payload</div>
+      </div>
+      <div>
+        <div class="stat-val">12-bit</div>
+        <div class="stat-lbl">Absolute Position</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="assets/rov-photo.jpg" alt="Actuade SPT mounted on work-class ROV">
+  </div>
+</div>
+
+<div class="a-divider"></div>
+
+<!-- PRODUCTS TEASER -->
+<div class="a-tile a-tile-white">
+  <div class="a-wrap">
+    <p class="a-eyebrow">Products</p>
+    <h2 class="a-h2">Two series. One standard.</h2>
+    <p class="a-tagline" style="margin-top:12px;max-width:580px;">The 115 and 150 Series cover the full range of subsea camera and instrument positioning requirements.</p>
+
+    <div class="prod-cards">
+      <a href="products.html#spt115" class="prod-card">
+        <div class="prod-card-img">
+          <img src="assets/spt-115-final.png" alt="115 Series">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-eyebrow">Aluminium · Titanium · Pan &amp; Tilt · Pan only</div>
+          <div class="prod-card-name">115 Series</div>
+          <div class="prod-spec-grid">
+            <div class="prod-spec-line"><span class="psl-k">Models</span><span class="psl-v">SPT-115, SPA-115, SPT-315, SPA-315</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Operating Depth</span><span class="psl-v">6000 m</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Max Payload</span><span class="psl-v">20 kg (dual yoke)</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Average Torque</span><span class="psl-v">15 Nm</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Pan / Tilt</span><span class="psl-v">±175° / ±175°</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Communication</span><span class="psl-v">Ethernet, RS-485, RS-232</span></div>
+          </div>
+          <span class="prod-card-link">Full specifications ›</span>
+        </div>
+      </a>
+
+      <a href="products.html#spt150" class="prod-card">
+        <div class="prod-card-img">
+          <img src="assets/spt-150-final.png" alt="150 Series">
+        </div>
+        <div class="prod-card-body">
+          <div class="prod-card-eyebrow">Aluminium · Titanium · Pan &amp; Tilt · Pan only</div>
+          <div class="prod-card-name">150 Series</div>
+          <div class="prod-spec-grid">
+            <div class="prod-spec-line"><span class="psl-k">Models</span><span class="psl-v">SPT-150, SPA-150, SPT-350, SPA-350</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Operating Depth</span><span class="psl-v">6000 m</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Max Payload</span><span class="psl-v">100 kg (dual yoke)</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Average Torque</span><span class="psl-v">50 Nm</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Pan / Tilt</span><span class="psl-v">±175° / ±110°</span></div>
+            <div class="prod-spec-line"><span class="psl-k">Communication</span><span class="psl-v">Ethernet, RS-485, RS-232</span></div>
+          </div>
+          <span class="prod-card-link">Full specifications ›</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="a-divider"></div>
+
+<!-- WHY ACTUADE -->
+<div class="a-tile a-tile-parchment">
+  <div class="a-wrap">
+    <p class="a-eyebrow">Why Actuade</p>
+    <h2 class="a-h2">Designed for the hardest conditions.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-title">No Rotating Connectors</div>
+        <p class="why-text">One of the most common subsea failure points eliminated entirely. Cables route internally — no rotating electrical contacts.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-title">High-Mounted Rotation</div>
+        <p class="why-text">The rotation axis is positioned high on the unit to withstand impacts and thruster wash — a critical advantage on work-class ROVs.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-title">Ethernet Native</div>
+        <p class="why-text">Full Ethernet support alongside RS-485 and RS-232 — direct integration with modern ROV control systems, no protocol converters.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <a href="technology.html" class="a-btn-outline">Explore all technology ›</a>
+    </div>
+  </div>
+</div>
+
+<div class="a-divider"></div>
+
+<!-- CTA STRIP -->
+<div class="a-tile a-tile-dark">
+  <div class="a-wrap">
+    <div class="cta-strip-inner">
+      <div class="cta-strip-text">
+        <h2 class="a-h2">Ready to specify?</h2>
+        <p>Contact us for pricing, datasheets, and technical consultation.</p>
+      </div>
+      <div class="cta-strip-btns">
+        <a href="contact.html" class="a-btn-primary">Request a Quote</a>
+        <a href="products.html" class="a-btn-outline a-btn-outline-dark">View Specifications</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="a-footer">
+  <div class="a-footer-inner">
+    <div class="a-footer-grid">
+      <div class="a-footer-brand">
+        <img src="assets/actuade-logo.png" alt="Actuade AS">
+        <p>Norwegian manufacturer of high-quality subsea pan &amp; tilt units for work-class ROVs and instrument platforms.</p>
+      </div>
+      <div class="a-footer-col">
+        <div class="a-footer-col-title">Navigation</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="contact.html">About &amp; Contact</a></li>
+        </ul>
+      </div>
+      <div class="a-footer-col">
+        <div class="a-footer-col-title">Contact</div>
+        <ul>
+          <li><a href="mailto:post@actuade.no">post@actuade.no</a></li>
+          <li><span>www.actuade.no</span></li>
+          <li><span>Wessels Veg 95</span></li>
+          <li><span>7502 Stjørdal, Norway</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="a-footer-bottom">
+      <span class="a-footer-copy">© 2025 Actuade AS. All rights reserved.</span>
+      <span class="a-footer-copy">Stjørdal, Norway</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
