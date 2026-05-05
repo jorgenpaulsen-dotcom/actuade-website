@@ -1,16 +1,63 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import modelDataUrl from "../assets/images/spt-115-public.glb";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
+import model115Url from "../assets/images/spt-115-public.glb";
+import model150Url from "../assets/images/spt-150-public.stl";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const modelConfigs = {
+  115: {
+    type: "gltf",
+    source: model115Url,
+    rotation: [0, 0, Math.PI / 2],
+    scale: 4.35,
+    camera: { desktop: [4.4, 2.45, 6.8], compact: [5.6, 3.1, 8.4] },
+  },
+  150: {
+    type: "stl",
+    source: model150Url,
+    rotation: [0, 0, 0],
+    scale: 4.75,
+    camera: { desktop: [4.8, 2.6, 7.1], compact: [6.1, 3.25, 8.8] },
+  },
+};
+
+const unitMaterial = new THREE.MeshStandardMaterial({
+  color: 0x0b0d0f,
+  metalness: 0.22,
+  roughness: 0.32,
+  envMapIntensity: 1.35,
+});
+
+const normalizeModel = (model, config) => {
+  model.rotation.set(...config.rotation);
+  model.updateMatrixWorld(true);
+
+  const sourceBox = new THREE.Box3().setFromObject(model);
+  const center = sourceBox.getCenter(new THREE.Vector3());
+  const size = sourceBox.getSize(new THREE.Vector3());
+  const scale = config.scale / Math.max(size.x, size.y, size.z);
+
+  model.scale.setScalar(scale);
+  model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+};
+
+const applyMaterial = (model) => {
+  model.traverse((node) => {
+    if (!node.isMesh) return;
+    node.geometry.computeVertexNormals();
+    node.material = unitMaterial.clone();
+  });
+};
 
 document.querySelectorAll("[data-spt-viewer]").forEach((root) => {
   const canvas = root.querySelector("canvas");
   const status = root.querySelector("[data-viewer-status]");
-  const modelSource = modelDataUrl;
+  const config = modelConfigs[root.dataset.sptViewer] || modelConfigs[115];
 
-  if (!canvas || !modelSource || !window.WebGLRenderingContext) {
+  if (!canvas || !config.source || !window.WebGLRenderingContext) {
     if (status) status.textContent = "3D view unavailable";
     root.classList.add("is-error");
     return;
@@ -37,7 +84,7 @@ document.querySelectorAll("[data-spt-viewer]").forEach((root) => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.08;
+  renderer.toneMappingExposure = 1.54;
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -51,24 +98,28 @@ document.querySelectorAll("[data-spt-viewer]").forEach((root) => {
   controls.zoomSpeed = 0.65;
 
   const modelRoot = new THREE.Group();
-  modelRoot.rotation.set(-0.08, -0.34, 0.02);
+  modelRoot.rotation.set(0.03, -0.42, 0);
   scene.add(modelRoot);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.34));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.78));
 
-  const hemisphere = new THREE.HemisphereLight(0xd8f5ff, 0x111725, 1.55);
+  const hemisphere = new THREE.HemisphereLight(0xe4f7ff, 0x1b2430, 2.25);
   scene.add(hemisphere);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 4.2);
-  keyLight.position.set(4, 6, 7);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 6.5);
+  keyLight.position.set(4.5, 6.5, 7.5);
   scene.add(keyLight);
 
-  const fillLight = new THREE.DirectionalLight(0x40c8e8, 1.6);
-  fillLight.position.set(-5, 1.5, 4);
+  const fillLight = new THREE.DirectionalLight(0x7ddcf1, 3.1);
+  fillLight.position.set(-5, 2.5, 4.5);
   scene.add(fillLight);
 
-  const rimLight = new THREE.DirectionalLight(0xffd47a, 1.4);
-  rimLight.position.set(2, 3, -6);
+  const frontLight = new THREE.DirectionalLight(0xffffff, 2.8);
+  frontLight.position.set(0, 1.8, 6.5);
+  scene.add(frontLight);
+
+  const rimLight = new THREE.DirectionalLight(0xffd47a, 2.8);
+  rimLight.position.set(2, 3.5, -6);
   scene.add(rimLight);
 
   const grid = new THREE.GridHelper(7, 14, 0x40c8e8, 0x1e2748);
@@ -77,52 +128,48 @@ document.querySelectorAll("[data-spt-viewer]").forEach((root) => {
   grid.material.transparent = true;
   scene.add(grid);
 
-  const loader = new GLTFLoader();
-  loader.load(
-    modelSource,
-    (gltf) => {
-      const model = gltf.scene;
-      const sourceBox = new THREE.Box3().setFromObject(model);
-      const center = sourceBox.getCenter(new THREE.Vector3());
-      const size = sourceBox.getSize(new THREE.Vector3());
-      const scale = 4.75 / Math.max(size.x, size.y, size.z);
+  const finishLoad = (model) => {
+    normalizeModel(model, config);
+    applyMaterial(model);
 
-      model.scale.setScalar(scale);
-      model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+    const compactView = root.clientWidth < 680;
+    const cameraPosition = compactView ? config.camera.compact : config.camera.desktop;
 
-      model.traverse((node) => {
-        if (!node.isMesh) return;
-        node.geometry.computeVertexNormals();
-        node.material = new THREE.MeshStandardMaterial({
-          color: 0x050607,
-          metalness: 0.34,
-          roughness: 0.46,
-          envMapIntensity: 0.9,
-        });
-      });
+    modelRoot.add(model);
+    camera.position.set(...cameraPosition);
+    controls.minDistance = compactView ? 4.4 : 3.2;
+    controls.maxDistance = compactView ? 10.4 : 8.8;
+    controls.target.set(0, 0, 0);
+    controls.update();
+    controls.saveState();
+    root.classList.add("is-loaded");
+    if (status) status.textContent = "";
+  };
 
-      const compactView = root.clientWidth < 680;
+  const handleLoadError = () => {
+    if (status) status.textContent = "3D model unavailable";
+    root.classList.add("is-error");
+  };
 
-      modelRoot.add(model);
-      camera.position.set(
-        compactView ? 5.8 : 4.6,
-        compactView ? 2.8 : 2.4,
-        compactView ? 8.2 : 6.25
-      );
-      controls.minDistance = compactView ? 4.4 : 3.2;
-      controls.maxDistance = compactView ? 10.2 : 8.4;
-      controls.target.set(0, 0, 0);
-      controls.update();
-      controls.saveState();
-      root.classList.add("is-loaded");
-      if (status) status.textContent = "";
-    },
-    undefined,
-    () => {
-      if (status) status.textContent = "3D model unavailable";
-      root.classList.add("is-error");
-    }
-  );
+  if (config.type === "stl") {
+    new STLLoader().load(
+      config.source,
+      (geometry) => {
+        const model = new THREE.Group();
+        model.add(new THREE.Mesh(geometry, unitMaterial.clone()));
+        finishLoad(model);
+      },
+      undefined,
+      handleLoadError
+    );
+  } else {
+    new GLTFLoader().load(
+      config.source,
+      (gltf) => finishLoad(gltf.scene),
+      undefined,
+      handleLoadError
+    );
+  }
 
   const resize = () => {
     const width = Math.max(1, root.clientWidth);
