@@ -1,4 +1,9 @@
 (() => {
+  if (/\/index\.html$/i.test(window.location.pathname) && window.history.replaceState) {
+    const cleanPath = window.location.pathname.replace(/index\.html$/i, "");
+    window.history.replaceState(null, "", `${cleanPath}${window.location.search}${window.location.hash}`);
+  }
+
   const body = document.body;
   body.classList.add("motion-ready");
 
