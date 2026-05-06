@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { STLLoader } from "three/addons/loaders/STLLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import model115Url from "../assets/images/spt-115-public.glb";
 import model150Url from "../assets/images/spt-150-public.stl";
 
@@ -25,10 +26,12 @@ const modelConfigs = {
 };
 
 const unitMaterial = new THREE.MeshStandardMaterial({
-  color: 0x0b0d0f,
-  metalness: 0.22,
-  roughness: 0.32,
-  envMapIntensity: 1.35,
+  color: 0x010203,
+  metalness: 0.08,
+  roughness: 0.52,
+  envMapIntensity: 0.58,
+  emissive: 0x000000,
+  emissiveIntensity: 0,
 });
 
 const normalizeModel = (model, config) => {
@@ -83,8 +86,12 @@ document.querySelectorAll("[data-spt-viewer]").forEach((root) => {
 
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.54;
+  renderer.toneMapping = THREE.NeutralToneMapping;
+  renderer.toneMappingExposure = 1.5;
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 0.48;
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -100,27 +107,35 @@ document.querySelectorAll("[data-spt-viewer]").forEach((root) => {
   const modelRoot = new THREE.Group();
   modelRoot.rotation.set(0.03, -0.42, 0);
   scene.add(modelRoot);
+  scene.add(camera);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.78));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
 
-  const hemisphere = new THREE.HemisphereLight(0xe4f7ff, 0x1b2430, 2.25);
+  const hemisphere = new THREE.HemisphereLight(0xf4fbff, 0x151b24, 1.85);
   scene.add(hemisphere);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 6.5);
-  keyLight.position.set(4.5, 6.5, 7.5);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 8.4);
+  keyLight.position.set(5.5, 7.5, 8.2);
   scene.add(keyLight);
 
-  const fillLight = new THREE.DirectionalLight(0x7ddcf1, 3.1);
-  fillLight.position.set(-5, 2.5, 4.5);
+  const fillLight = new THREE.DirectionalLight(0xa7e9ff, 1.35);
+  fillLight.position.set(-5.5, 3.2, 5.4);
   scene.add(fillLight);
 
-  const frontLight = new THREE.DirectionalLight(0xffffff, 2.8);
-  frontLight.position.set(0, 1.8, 6.5);
+  const frontLight = new THREE.DirectionalLight(0xffffff, 3.7);
+  frontLight.position.set(0, 2.4, 7.2);
   scene.add(frontLight);
 
-  const rimLight = new THREE.DirectionalLight(0xffd47a, 2.8);
-  rimLight.position.set(2, 3.5, -6);
+  const rimLight = new THREE.DirectionalLight(0xffd98c, 4.2);
+  rimLight.position.set(2.4, 4.2, -6.2);
   scene.add(rimLight);
+
+  const topLight = new THREE.DirectionalLight(0xffffff, 2.3);
+  topLight.position.set(-1.2, 8.4, 1.8);
+  scene.add(topLight);
+
+  const cameraLight = new THREE.PointLight(0xffffff, 0.72, 12, 1.35);
+  camera.add(cameraLight);
 
   const grid = new THREE.GridHelper(7, 14, 0x40c8e8, 0x1e2748);
   grid.position.y = -1.42;
