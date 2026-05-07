@@ -1862,12 +1862,40 @@ body.motion-ready .reveal.is-visible {
 
   .hero h1,
   .page-hero h1 {
-    font-size: 2.85rem;
+    max-width: 100%;
+    font-size: clamp(2.35rem, 10.5vw, 2.62rem);
   }
 
   .hero-lead,
   .page-hero p:not(.eyebrow) {
     font-size: 1.08rem;
+  }
+
+  .hero-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-copy {
+    min-width: 0;
+    width: min(100%, 350px);
+  }
+
+  .hero-lead {
+    max-width: 350px;
+  }
+
+  .hero-actions {
+    max-width: 330px;
+    align-items: stretch;
+  }
+
+  .hero-actions .button {
+    flex: 1 1 100%;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
   }
 
   .section {
